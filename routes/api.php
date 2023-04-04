@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\KapalController;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,12 +28,19 @@ Route::controller(AuthController::class)->group(function () {
    Route::post('register', 'register');
    Route::post('logout', 'logout');
    Route::post('refresh', 'refresh');
+   Route::post('verify_otp', 'verify_otp');
 });
 
-Route::controller(TodoController::class)->group(function () {
-   Route::get('todos', 'index');
-   Route::post('todo', 'store');
-   Route::get('todo/{id}', 'show');
-   Route::put('todo/{id}', 'update');
-   Route::delete('todo/{id}', 'destroy');
+Route::controller(KapalController::class)->group(function () {
+   Route::post('kapal', 'store');
+   Route::post('kapal/terima', 'terima');
+   Route::put('kapal/{id}', 'update');
+   Route::delete('kapal/{id}', 'destroy');
+});
+
+Route::controller(UserController::class)->group(function () {
+   Route::get('user', 'index');
+   Route::post('user/terima', 'terima');
+   Route::put('user/{id}', 'update');
+   Route::delete('user/{id}', 'destroy');
 });
